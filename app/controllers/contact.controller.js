@@ -45,17 +45,3 @@ exports.create = async (req, res, next) =>{
         );
     }
 };
-exports.create = async (req, res, next) =>{
-    if(!req.boby?.name){
-        return next(new ApiError(400, "Name can not be empty"));
-    }
-    try {
-        const contactService = new ContactService(MongoDB.client);
-        const document = await contactService.create(req.boby);
-        return res.send(document);
-    } catch (error) {
-        return next(
-            new ApiError(500, "An error occurred while creating the contact")
-        );
-    }
-};
